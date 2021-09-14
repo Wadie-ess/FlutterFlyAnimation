@@ -35,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
     //late Weather myweather   ;
     // myweather = data.getdata() as Weather;
     final data = Provider.of<Weatherdata>(context);
+    final icon = data.w2.genertateIcon();   
 
 
     return Scaffold(
@@ -78,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.black.withAlpha(200),
                         offset: const Offset(0, 15),
                         opacity: 0.3,
-                        child: Image.asset(sun_and_cloud))),
+                        child: Image.asset(icon))),
                 Text(
                   data.w2.description,
                   style: TextStyle(
@@ -91,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children:  [
-                     TodayWeathedata(title: 'Temp',value: '${data.w2.temp}c',),
+                     TodayWeathedata(title: 'Temp',value: '${data.w2.temp}°C',),
                      TodayWeathedata(title: 'Wind Speed',value: '${data.w2.windspedd}Km/h',),
                      TodayWeathedata(title: 'Humidity',value: '${data.w2.humidity}%',),
                     ],
