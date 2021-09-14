@@ -83,11 +83,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   data.w2.description,
                   style: TextStyle(
                       color: Colors.white.withAlpha(150),
-                      fontSize: 30.sp,
+                      fontSize: 25.sp,
                       fontWeight: FontWeight.bold),
                 ),
                 Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 5.h),
+                  padding:  EdgeInsets.symmetric(vertical: 3.h),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children:  [
@@ -153,14 +153,14 @@ class TodayWeathedata extends StatelessWidget {
           title!,
           style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 10.sp,
+              fontSize: 12.sp,
               color: Colors.white),
         ),
         Text(
           value!,
           style: TextStyle(
               //fontWeight: FontWeight.bold,
-              fontSize: 9.sp,
+              fontSize:10.sp,
               color: Colors.white),
         )
       ],

@@ -22,7 +22,7 @@ class Weather {
       this._humidity);
 
   factory Weather.fromjson(Map<String, dynamic> jsondata) {
-    return Weather(jsondata['main']['temp'], jsondata['wind']['speed'], jsondata['weather'][0]['main'],
+    return Weather(jsondata['main']['temp'], jsondata['wind']['speed'], jsondata['weather'][0]['description'],
         jsondata['name'],  jsondata['main']['humidity']);
   }
 }
