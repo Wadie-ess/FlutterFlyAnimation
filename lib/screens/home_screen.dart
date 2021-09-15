@@ -21,13 +21,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void didChangeDependencies() {
- 
-    if (dataisloded == false) {
-      final data = Provider.of<Weatherdata>(context);
-      data.getdata();
-      dataisloded = true;
-    }
-    super.didChangeDependencies();
+    // if (dataisloded == false) {
+    //   final data = Provider.of<Weatherdata>(context);
+    //   data.getdata();
+    //   dataisloded = true;
+    // }
+    // super.didChangeDependencies();
   }
 
   @override
@@ -35,8 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
     //late Weather myweather   ;
     // myweather = data.getdata() as Weather;
     final data = Provider.of<Weatherdata>(context);
-    final icon = data.w2.genertateIcon();   
-
+    // final icon = data.w2.genertateIcon();
 
     return Scaffold(
       appBar: AppBar(
@@ -44,107 +42,131 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         leading: const ImageIcon(AssetImage(options)),
         actions: [
-          SizedBox(
-            height: 5.h,
-            width:  10.w,
-            child: SvgPicture.asset(user))
+          SizedBox(height: 5.h, width: 10.w, child: SvgPicture.asset(user))
         ],
       ),
       backgroundColor: backgroundColor,
       body: SafeArea(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Align(
-            alignment: Alignment.center,
-            child: Column(
-              children: [
-                Text(
-                  '${data.w2.cityname},Morocco',
-                  style: TextStyle(color: Colors.white, fontSize: 19.sp),
-                ),
-                Text(
-                  'Today',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25.sp,
-                      fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-
-                    //color: Colors.white,
-                    height: 25.h,
-                    width: 55.w,
-                    child: SimpleShadow(
-                        color: Colors.black.withAlpha(200),
-                        offset: const Offset(0, 15),
-                        opacity: 0.3,
-                        child: Image.asset(icon))),
-                Text(
-                  data.w2.description,
-                  style: TextStyle(
-                      color: Colors.white.withAlpha(150),
-                      fontSize: 25.sp,
-                      fontWeight: FontWeight.bold),
-                ),
-                Padding(
-                  padding:  EdgeInsets.symmetric(vertical: 3.h),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children:  [
-                     TodayWeathedata(title: 'Temp',value: '${data.w2.temp}°C',),
-                     TodayWeathedata(title: 'Wind Speed',value: '${data.w2.windspedd}Km/h',),
-                     TodayWeathedata(title: 'Humidity',value: '${data.w2.humidity}%',),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding:  EdgeInsets.symmetric(horizontal: 3.h,vertical: 1.h),
-                  child: Row(
+          child: FutureBuilder<Weather>(
+              future: data.getdata(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.connectionState == ConnectionState.none) {
+                  return const Center(child: Text('connection non'));
+                } else if (snapshot.hasError) {
+                  return const Center(child: Text('connection problem'));
+                } else {
+                  final icon = snapshot.data!.genertateIcon();
+                  final data = snapshot.data!;
+                  return Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children:  [
-                       Text('Today',style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 12.sp
-                      ),),
-                      Container(
-                        //height: 5.h,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                             borderRadius: BorderRadius.circular(50),
-                        ),
-                       
-                        child: Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Text('View Full Report',style: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.bold,
-                            color: backgroundColor
+                    children: [
+                      Align(
+                        alignment: Alignment.center,
+                        child: Column(
+                          children: [
+                            Text(
+                              '${data.cityname},Morocco',
+                              style: TextStyle(
+                                  color: Colors.white, fontSize: 19.sp),
+                            ),
+                            Text(
+                              'Today',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 25.sp,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
 
-                          ),),
+                                //color: Colors.white,
+                                height: 25.h,
+                                width: 55.w,
+                                child: SimpleShadow(
+                                    color: Colors.black.withAlpha(200),
+                                    offset: const Offset(0, 15),
+                                    opacity: 0.3,
+                                    child: Image.asset(icon))),
+                            Text(
+                              data.description,
+                              style: TextStyle(
+                                  color: Colors.white.withAlpha(150),
+                                  fontSize: 25.sp,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(vertical: 3.h),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  TodayWeathedata(
+                                    title: 'Temp',
+                                    value: '${data.temp}°C',
+                                  ),
+                                  TodayWeathedata(
+                                    title: 'Wind Speed',
+                                    value: '${data.windspedd}Km/h',
+                                  ),
+                                  TodayWeathedata(
+                                    title: 'Humidity',
+                                    value: '${data.humidity}%',
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 3.h, vertical: 1.h),
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    'Today',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12.sp),
+                                  ),
+                                  Container(
+                                    //height: 5.h,
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(50),
+                                    ),
+
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Text(
+                                        'View Full Report',
+                                        style: TextStyle(
+                                            fontSize: 12.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: backgroundColor),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                          ],
                         ),
-                      )
+                      ),
                     ],
-                  ),
-                )
-              ],
-            ),
-          ),
-        ],
-      )),
+                  );
+                }
+              })),
     );
   }
 }
 
 class TodayWeathedata extends StatelessWidget {
-  const TodayWeathedata({
-    this.title,this.value
-  }) ;
+  const TodayWeathedata({this.title, this.value});
   final String? title;
   final String? value;
-
 
   @override
   Widget build(BuildContext context) {
@@ -161,7 +183,7 @@ class TodayWeathedata extends StatelessWidget {
           value!,
           style: TextStyle(
               //fontWeight: FontWeight.bold,
-              fontSize:10.sp,
+              fontSize: 10.sp,
               color: Colors.white),
         )
       ],

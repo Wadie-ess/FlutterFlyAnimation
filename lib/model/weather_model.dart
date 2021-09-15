@@ -1,4 +1,5 @@
 import 'package:my_weather_app/helper/constants.dart';
+import 'package:recase/recase.dart';
 
 class Weather {
   final _temp;
@@ -12,7 +13,7 @@ class Weather {
 
   get windspedd => _windspedd;
 
-  get description => _description;
+  get description => _description.titleCase;
 
   get cityname => _cityname;
 
