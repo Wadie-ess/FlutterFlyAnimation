@@ -26,18 +26,6 @@ const n_10 = 'lib/assets/images/10n.png';
 const n_11 = 'lib/assets/images/11n.png';
 const n_13 = 'lib/assets/images/13n.png';
 const n_50 = 'lib/assets/images/50n.png';
-
-const high_sunn = 'lib/assets/images/high_sunn.png';
-//const lettle_rain_flash = 'lib/assets/images/lettle_rain_flash.png';
-//const rain_and_flash = 'lib/assets/images/rain_and_flash.png';
-const rain = 'lib/assets/images/rain.png';
-const snow = 'lib/assets/images/snow.png';
-const soft_sun_and_cloud = 'lib/assets/images/soft_sun_and_cloud.png';
-//const soft_sun = 'lib/assets/images/soft_sun.png';
-const sun_and_cloud = 'lib/assets/images/sun_and_cloud.png';
-const cloud = 'lib/assets/images/cloud.png';
-const flash = 'lib/assets/images/flash.png';
-const mist = 'lib/assets/images/mist.png';
 // icons;
 const options = 'lib/assets/icons/options.png';
 const user = 'lib/assets/icons/user.svg';

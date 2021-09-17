@@ -21,12 +21,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void didChangeDependencies() {
-    // if (dataisloded == false) {
-    //   final data = Provider.of<Weatherdata>(context);
-    //   data.getdata();
-    //   dataisloded = true;
-    // }
-    // super.didChangeDependencies();
+     if (dataisloded == false) {
+       final data = Provider.of<Weatherdata>(context);
+       data.fecthWeatherList();
+       dataisloded = true;
+     }
+     super.didChangeDependencies();
   }
 
   @override
