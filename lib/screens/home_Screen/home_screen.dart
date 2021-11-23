@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:my_weather_app/animation/animation_hover.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_shadow/simple_shadow.dart';
 import 'package:sizer/sizer.dart';
@@ -91,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     color: Colors.black.withAlpha(200),
                                     offset: const Offset(0, 15),
                                     opacity: 0.3,
-                                    child: Image.asset(icon))),
+                                    child: AnimatedImage(icon: icon,),)),
                             Text(
                               data.description,
                               style: TextStyle(

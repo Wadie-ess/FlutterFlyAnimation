@@ -25,8 +25,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Sizer(builder: (_, __, ___) {
-      return MaterialApp(
-        home: const PagesView()
+      return const MaterialApp(
+        
+        home: PagesView()
       );
     });
   }

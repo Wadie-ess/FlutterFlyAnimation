@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:my_weather_app/animation/animation_hover.dart';
 import 'package:my_weather_app/data/weather_data.dart';
 import 'package:my_weather_app/helper/constants.dart';
 import 'package:sizer/sizer.dart';
@@ -31,8 +32,7 @@ class WetherWidgetListItem extends StatelessWidget {
                   child: SizedBox(
                       height: 7.h,
                       width: 15.w,
-                      child: Image.asset(
-                          weatherdata.weatherList[index].genertateIcon())),
+                      child: AnimatedImage(icon: weatherdata.weatherList[index].genertateIcon())),
                 ),
                 Text(
                     DateFormat.Hm()
