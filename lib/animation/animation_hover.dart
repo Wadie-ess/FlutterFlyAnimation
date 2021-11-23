@@ -21,7 +21,7 @@ class _AnimatedImageState extends State<AnimatedImage>
     duration: const Duration(seconds: 3),
   )..repeat(reverse: true);
   late final Animation<Offset> _animation =
-      Tween(begin: Offset.zero, end: const Offset(0, 0.09))
+      Tween(begin: Offset.zero, end: const Offset(0, 0.09))     
           .animate(_controller);
 
   @override
