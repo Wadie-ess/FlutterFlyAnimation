@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:my_weather_app/data/weather_data.dart';
+import 'package:my_weather_app/utils/pagesview.dart';
 import 'package:sizer/sizer.dart';
 import 'package:my_weather_app/screens/home_Screen/home_screen.dart';
 import 'package:provider/provider.dart';
@@ -25,9 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(builder: (_, __, ___) {
       return MaterialApp(
-        home: HomeScreen(
-          key: key,
-        ),
+        home: const PagesView()
       );
     });
   }

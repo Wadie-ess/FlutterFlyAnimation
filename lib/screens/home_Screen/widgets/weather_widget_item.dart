@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_weather_app/data/weather_data.dart';
+import 'package:my_weather_app/helper/constants.dart';
 import 'package:sizer/sizer.dart';
 
 class WetherWidgetListItem extends StatelessWidget {
@@ -20,7 +21,7 @@ class WetherWidgetListItem extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-            width: 20.w,
+            width: 21.w,
             height: 8.h,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -28,21 +29,23 @@ class WetherWidgetListItem extends StatelessWidget {
               children: [
                 Center(
                   child: SizedBox(
-                    height: 7.h,
-                    width: 15.w,
-                    child: Image.asset(weatherdata.weatherList[index].genertateIcon())),
+                      height: 7.h,
+                      width: 15.w,
+                      child: Image.asset(
+                          weatherdata.weatherList[index].genertateIcon())),
                 ),
-                Text(DateFormat.Hm().format(weatherdata.weatherList[index].date!),style : TextStyle(
-                  color: Colors.white.withOpacity(0.7),
-                  fontSize: 11.sp
-                )),
-                Text(weatherdata.weatherList[index].temp.toStringAsFixed(0)+'°C',style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15.sp
-                ),)
-                
-                
+                Text(
+                    DateFormat.Hm()
+                        .format(weatherdata.weatherList[index].date!),
+                    style: TextStyle(
+                        color: Colors.white.withOpacity(0.6), fontSize: 11.sp)),
+                Text(
+                  weatherdata.weatherList[index].temp.toStringAsFixed(0) + '°C',
+                  style: TextStyle(
+                      color: Colors.white.withOpacity(0.8),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 17.sp),
+                )
               ],
             ),
             decoration: BoxDecoration(
@@ -51,9 +54,7 @@ class WetherWidgetListItem extends StatelessWidget {
             ),
           ),
         );
-
-
-      
-    },);
+      },
+    );
   }
 }
