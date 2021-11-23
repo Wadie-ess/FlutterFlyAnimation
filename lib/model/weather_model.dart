@@ -8,6 +8,7 @@ class Weather {
   final _cityname;
   final _humidity;
   String icon;
+  DateTime? date;
 
   get temp => _temp;
 
@@ -18,9 +19,10 @@ class Weather {
   get cityname => _cityname;
 
   get humidity => _humidity;
+  
 
   Weather(this._temp, this._windspedd, this._description, this._cityname,
-      this._humidity, this.icon);
+      this._humidity, this.icon, this.date);
 
   factory Weather.fromjson(Map<String, dynamic> jsondata) {
     return Weather(
@@ -29,7 +31,8 @@ class Weather {
         jsondata['weather'][0]['description'],
         jsondata['name'],
         jsondata['main']['humidity'],
-        jsondata['weather'][0]['icon']);
+        jsondata['weather'][0]['icon'],
+        DateTime.tryParse(jsondata['dt_txt'].toString()));
   }
   String genertateIcon() {
     switch (icon) {
@@ -56,7 +59,7 @@ class Weather {
       case '02n':
         return n_2;
       case '03n':
-        return n_3;
+        return n_2;
       case '04n':
         return n_4;
       case '09n':

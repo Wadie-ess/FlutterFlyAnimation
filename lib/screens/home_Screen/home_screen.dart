@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_shadow/simple_shadow.dart';
@@ -8,6 +9,8 @@ import 'package:sizer/sizer.dart';
 import 'package:my_weather_app/data/weather_data.dart';
 import 'package:my_weather_app/helper/constants.dart';
 import 'package:my_weather_app/model/weather_model.dart';
+
+import 'widgets/weather_widget_item.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -33,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     //late Weather myweather   ;
     // myweather = data.getdata() as Weather;
-    final data = Provider.of<Weatherdata>(context);
+    final weatherdata = Provider.of<Weatherdata>(context);
     // final icon = data.w2.genertateIcon();
 
     return Scaffold(
@@ -48,15 +51,16 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: backgroundColor,
       body: SafeArea(
           child: FutureBuilder<Weather>(
-              future: data.getdata(),
+              future: weatherdata.getdata(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.connectionState == ConnectionState.none) {
                   return const Center(child: Text('connection non'));
                 } else if (snapshot.hasError) {
-                  return const Center(child: Text('connection problem'));
+                  return  Center(child: Text(snapshot.error.toString()));
                 } else {
+                //  print('a7a' + weatherdata.myay.length.toString());
                   final icon = snapshot.data!.genertateIcon();
                   final data = snapshot.data!;
                   return Column(
@@ -72,10 +76,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                   color: Colors.white, fontSize: 19.sp),
                             ),
                             Text(
-                              'Today',
+                              'Currently',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontSize: 25.sp,
+                                  fontSize: 20.sp,
                                   fontWeight: FontWeight.bold),
                             ),
                             SizedBox(
@@ -135,7 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     //height: 5.h,
                                     decoration: BoxDecoration(
                                       color: Colors.white,
-                                      borderRadius: BorderRadius.circular(50),
+                                      borderRadius: BorderRadius.circular(8),
                                     ),
 
                                     child: Padding(
@@ -151,7 +155,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                   )
                                 ],
                               ),
+                            ),
+                            SizedBox(
+                              width: 100.w,
+                              height: 20.h,
+                              child: WetherWidgetListItem(weatherdata: weatherdata),
                             )
+
                           ],
                         ),
                       ),
@@ -162,6 +172,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
+
+
 
 class TodayWeathedata extends StatelessWidget {
   const TodayWeathedata({this.title, this.value});
