@@ -25,12 +25,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void didChangeDependencies() {
-     if (dataisloded == false) {
-       final data = Provider.of<Weatherdata>(context);
-       data.fecthWeatherList();
-       dataisloded = true;
-     }
-     super.didChangeDependencies();
+    if (dataisloded == false) {
+      final data = Provider.of<Weatherdata>(context);
+      data.fecthWeatherList();
+      dataisloded = true;
+    }
+    super.didChangeDependencies();
   }
 
   @override
@@ -59,9 +59,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 } else if (snapshot.connectionState == ConnectionState.none) {
                   return const Center(child: Text('connection non'));
                 } else if (snapshot.hasError) {
-                  return  Center(child: Text(snapshot.error.toString()));
+                  return Center(child: Text(snapshot.error.toString()));
                 } else {
-                //  print('a7a' + weatherdata.myay.length.toString());
+                  //  print('a7a' + weatherdata.myay.length.toString());
                   final icon = snapshot.data!.genertateIcon();
                   final data = snapshot.data!;
                   return Column(
@@ -89,10 +89,13 @@ class _HomeScreenState extends State<HomeScreen> {
                                 height: 25.h,
                                 width: 55.w,
                                 child: SimpleShadow(
-                                    color: Colors.black.withAlpha(200),
-                                    offset: const Offset(0, 15),
-                                    opacity: 0.3,
-                                    child: AnimatedImage(icon: icon,),)),
+                                  color: Colors.black.withAlpha(200),
+                                  offset: const Offset(0, 15),
+                                  opacity: 0.3,
+                                  child: AnimatedImage(
+                                    icon: icon,
+                                  ),
+                                )),
                             Text(
                               data.description,
                               style: TextStyle(
@@ -123,7 +126,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             ),
                             Padding(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 3.h, vertical: 3.h),
+                                  horizontal: 3.h, vertical: 1.h),
                               child: Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment:
@@ -160,9 +163,9 @@ class _HomeScreenState extends State<HomeScreen> {
                             SizedBox(
                               width: 100.w,
                               height: 20.h,
-                              child: WetherWidgetListItem(weatherdata: weatherdata),
+                              child: WetherWidgetListItem(
+                                  weatherdata: weatherdata),
                             )
-
                           ],
                         ),
                       ),
@@ -173,8 +176,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-
 
 class TodayWeathedata extends StatelessWidget {
   const TodayWeathedata({this.title, this.value});
